@@ -15,3 +15,8 @@ export async function addTransaction(data: TransactionData) {
   const [id] = await db('transactions').insert(data)
   return id
 }
+
+export async function deleteTransaction(id: number | string) {
+  const result = await db('transactions').where({ id }).del()
+  return result > 0 
+}
