@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllTransactions, getTransactionById, addTransaction } from '../db/transactions.ts'
+import { getAllTransactions, getTransactionById, addTransaction, deleteTransaction } from '../db/transactions.ts'
 
 const router = express.Router()
 
@@ -36,6 +36,21 @@ router.post('/', async (req, res) => {
     res.status(201).json({ id })
   } catch (err) {
     res.status(500).json({ error: 'Failed to add transaction' })
+  }
+})
+
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    const success = await deleteTransaction(id)
+    if (success) {
+      res.status(204).end()
+    } else {
+      res.status(404).json({ error: 'Transaction not found' })
+    }
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to delete transaction' })
   }
 })
 
