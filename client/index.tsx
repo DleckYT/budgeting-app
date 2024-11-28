@@ -1,3 +1,4 @@
+// index.tsx
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -11,15 +12,12 @@ const queryClient = new QueryClient()
 
 document.addEventListener('DOMContentLoaded', () => {
   createRoot(document.getElementById('app') as HTMLElement).render(
-    /**
-     * TODO: replace domain, clientId, and audience
-     */
     <Auth0Provider
-      domain=""
-      clientId=""
+      domain="your-domain"
+      clientId="your-client-id"
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: '',
+        audience: 'your-audience',
       }}
     >
       <QueryClientProvider client={queryClient}>
