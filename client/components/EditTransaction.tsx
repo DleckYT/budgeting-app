@@ -75,20 +75,23 @@ function EditTransaction() {
             required
           />
         </div>
-        <div>
-          <label>Category:</label>
-          <select
-            name="category_id"
-            value={formData.category_id}
-            onChange={handleChange}
-            required
-          >
-            {categories?.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
+          <div>
+            <label>Category:</label>
+            <select
+              name="category_id"
+              value={formData.category_id || ''} // Default to empty string if category_id is null
+              onChange={handleChange}
+              required
+            >
+              <option value="" disabled>
+                No category selected
               </option>
-            ))}
-          </select>
+              {categories?.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
         </div>
         <div>
           <label>Transaction Date:</label>
