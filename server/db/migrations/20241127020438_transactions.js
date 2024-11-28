@@ -19,7 +19,7 @@ export const up = async function (knex) {
       .unsigned()
       .references('id')
       .inTable('category')
-      .onDelete('CASCADE') // Deletes transactions if category is deleted
+      .onDelete('SET NULL') // Sets category_id to NULL if category is deleted
       .onUpdate('CASCADE'); // Updates transactions if category id is updated
   });
 };

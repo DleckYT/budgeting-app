@@ -38,3 +38,15 @@ export function addTransaction(transaction: TransactionData) {
 export function deleteTransaction(id: number): Promise<void> {
   return request.delete(`${rootUrl}/transactions/${id}`).then(() => {})
 }
+
+
+export function updateTransaction(transaction: Transaction): Promise<void> {
+  return request
+    .put(`${rootUrl}/transactions/${transaction.id}`)
+    .send(transaction)
+    .then(() => {})
+    .catch((err) => {
+      console.error('Error updating transaction:', err)
+      throw new Error('Failed to update transaction')
+    })
+}

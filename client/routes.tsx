@@ -5,6 +5,7 @@ import Transactions from './components/Transactions'
 import Categories from './components/Categories'
 import Charts from './components/Charts'
 import Dashboard from './components/Dashoboard'
+import EditTransaction from './components/EditTransaction'
 
 const routes = createRoutesFromElements(
   <Route element={<App />}>
@@ -13,6 +14,7 @@ const routes = createRoutesFromElements(
     <Route path="/categories" element={<Categories />} />
     <Route path="/charts" element={<Charts />} />
     <Route path="/Dashboard" element={<Dashboard />} />
+    <Route path="/transactions/edit/:id" element={<EditTransaction />} />
   </Route>
 )
 
