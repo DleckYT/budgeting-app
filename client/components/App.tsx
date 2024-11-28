@@ -1,17 +1,19 @@
-import { useFruits } from '../hooks/useFruits.ts'
+import '../styles/main.css'
+import Dashboard from './Dashoboard.tsx'
 
-function App() {
-  const { data } = useFruits()
-
+const App = () => {
   return (
-    <>
-      <div className="app">
-        <h1 className="text-3xl font-bold underline">
-          Fullstack Boilerplate - with Fruits!
-        </h1>
-        <ul>{data && data.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
-      </div>
-    </>
+    <div>
+      <header>
+        <h1>Budgeting App</h1>
+      </header>
+      <main>
+        <Dashboard />
+      </main>
+      <footer>
+        <p>heeeee</p>
+      </footer>
+    </div>
   )
 }
 
