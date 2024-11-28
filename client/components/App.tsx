@@ -1,32 +1,17 @@
-import { Outlet, Link } from 'react-router-dom'
+import '../styles/main.css'
+import Dashboard from './Dashoboard.tsx'
 
-function App() {
+const App = () => {
   return (
     <div>
       <header>
         <h1>Budgeting App</h1>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/transactions">Transactions</Link>
-            </li>
-            <li>
-              <Link to="/categories">Categories</Link>
-            </li>
-            <li>
-              <Link to="/charts">Charts</Link>
-            </li>
-          </ul>
-        </nav>
       </header>
       <main>
-        <Outlet /> {/* This renders the child routes */}
+        <Dashboard />
       </main>
       <footer>
-        <p>© 2024 Budgeting App</p>
+        <p>heeeee</p>
       </footer>
     </div>
   )
