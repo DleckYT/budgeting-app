@@ -31,13 +31,18 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const data = req.body
-    const id = await addTransaction(data)
-    res.status(201).json({ id })
+    const data = req.body;
+    console.log('Received transaction data:', data);  // Log the transaction data from the request
+
+    const id = await addTransaction(data);
+    console.log('Transaction added with ID:', id);  // Log the ID of the newly added transaction
+
+    res.status(201).json({ id });
   } catch (err) {
-    res.status(500).json({ error: 'Failed to add transaction' })
+    console.error('Error adding transaction:', err);  // Log the error if something goes wrong
+    res.status(500).json({ error: 'Failed to add transaction' });
   }
-})
+});
 
 
 router.delete('/:id', async (req, res) => {

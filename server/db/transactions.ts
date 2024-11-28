@@ -12,9 +12,19 @@ export async function getTransactionById(id: number | string) {
 }
 
 export async function addTransaction(data: TransactionData) {
-  const [id] = await db('transactions').insert(data)
-  return id
+  try {
+    console.log('Inserting transaction into database:', data);  // Log the data to be inserted
+
+    const [id] = await db('transactions').insert(data);
+    
+    console.log('Transaction inserted with ID:', id);  // Log the ID of the inserted transaction
+    return id;
+  } catch (err) {
+    console.error('Error inserting transaction into database:', err);  // Log any database errors
+    throw err;  // Re-throw the error to be handled by the route handler
+  }
 }
+
 
 export async function deleteTransaction(id: number | string) {
   const result = await db('transactions').where({ id }).del()

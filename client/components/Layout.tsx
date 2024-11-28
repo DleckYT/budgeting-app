@@ -4,12 +4,29 @@ export default function Layout() {
   return (
     <>
       <header>
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
+        <h1>Budgeting App</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/transactions">Transactions</a>
+            </li>
+            <li>
+              <a href="/categories">Categories</a>
+            </li>
+          </ul>
+        </nav>
       </header>
+
       <main>
         <Outlet />
       </main>
-      <footer></footer>
+
+      <footer>
+        <p>&copy; 2024 Budgeting App</p>
+      </footer>
     </>
   )
 }
