@@ -1,10 +1,6 @@
 import { Outlet, Link } from 'react-router-dom'
-import '../styles/main.css'
-import Dashboard from './Dashoboard.tsx'
 
-
-
-const App = () => {
+function App() {
   return (
     <div>
       <header>
@@ -23,15 +19,17 @@ const App = () => {
             <li>
               <Link to="/charts">Charts</Link>
             </li>
+            <li>
+              <Link to="/Dashboard">Dashboard</Link>
+            </li>
           </ul>
         </nav>
       </header>
       <main>
-        <Dashboard />
         <Outlet /> 
       </main>
       <footer>
-        <p>heeeee</p>
+        <p>© 2024 Budgeting App</p>
       </footer>
     </div>
   )
