@@ -4,10 +4,11 @@ import {
   getTransactionById,
   addTransaction,
   deleteTransaction,
+  updateTransaction
 } from '../apis/transactions'
 import { Transaction, TransactionData } from '../../models/transactions'
 
-// Hook to fetch all transactions
+
 export function useTransactions() {
   return useQuery<Transaction[], Error>({
     queryKey: ['transactions'],
@@ -15,7 +16,7 @@ export function useTransactions() {
   })
 }
 
-// Hook to fetch a single transaction by ID
+
 export function useTransaction(id: number) {
   return useQuery<Transaction, Error>({
     queryKey: ['transaction', id],
@@ -23,7 +24,7 @@ export function useTransaction(id: number) {
   })
 }
 
-// Hook to add a new transaction
+
 export function useAddTransaction() {
   const queryClient = useQueryClient()
 
@@ -35,13 +36,24 @@ export function useAddTransaction() {
   })
 }
 
-// Hook to delete a transaction
+
 export function useDeleteTransaction() {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, number>({
     mutationFn: deleteTransaction,
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['transactions'] })
+    },
+  })
+}
+
+
+export function useUpdateTransaction() {
+  const queryClient = useQueryClient()
+
+  return useMutation<void, Error, Transaction>({
+    mutationFn: updateTransaction,     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
     },
   })

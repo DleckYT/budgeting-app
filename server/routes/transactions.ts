@@ -1,5 +1,6 @@
 import express from 'express'
-import { getAllTransactions, getTransactionById, addTransaction, deleteTransaction } from '../db/transactions.ts'
+import { getAllTransactions, getTransactionById, addTransaction, deleteTransaction, updateTransaction } from '../db/transactions.ts'
+import { TransactionData } from '../../models/transactions.ts'
 
 const router = express.Router()
 
@@ -32,14 +33,14 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const data = req.body;
-    console.log('Received transaction data:', data);  // Log the transaction data from the request
+    console.log('Received transaction data:', data);  
 
     const id = await addTransaction(data);
-    console.log('Transaction added with ID:', id);  // Log the ID of the newly added transaction
+    console.log('Transaction added with ID:', id);  
 
     res.status(201).json({ id });
   } catch (err) {
-    console.error('Error adding transaction:', err);  // Log the error if something goes wrong
+    console.error('Error adding transaction:', err);  
     res.status(500).json({ error: 'Failed to add transaction' });
   }
 });
@@ -58,5 +59,30 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ error: 'Failed to delete transaction' })
   }
 })
+
+
+
+router.put('/:id', async (req, res) => {
+  const transactionId = parseInt(req.params.id);
+  const updatedData: TransactionData = req.body;
+
+  console.log('Received updated data:', updatedData);  
+
+  try {
+    const updatedTransaction = await updateTransaction(transactionId, updatedData);
+
+    if (!updatedTransaction) {
+      return res.status(404).json({ message: 'Transaction not found' });
+    }
+
+    return res.status(200).json(updatedTransaction);
+  } catch (error) {
+    console.error('Error updating transaction:', error);
+    return res.status(500).json({ message: 'Failed to update transaction' });
+  }
+});
+
+
+
 
 export default router
