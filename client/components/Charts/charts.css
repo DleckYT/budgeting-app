@@ -1,6 +1,78 @@
-.tooltip{
+/* General container styles */
+.charts-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Loading and error messages */
+.loading-message,
+.error-message {
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  font-size: 1.2rem;
+  color: #555;
+  margin: 2rem 0;
+}
+
+.error-message {
+  color: #d9534f; /* Bootstrap-like error color */
+}
+
+/* Title styles */
+.charts-title {
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  animation: slideDown 0.6s ease-out;
+}
+
+.charts-description {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Chart container with animation */
+.chart {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  animation: slideDown 0.8s ease-in-out;
+}
+
+.chart:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

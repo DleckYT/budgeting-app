@@ -1,11 +1,13 @@
 import { Outlet, Link } from 'react-router-dom'
 
-function App() {
+import '../styles/main.css'
+
+function App(): JSX.Element {
   return (
-    <div>
-      <header>
-        <h1>Budgeting App</h1>
-        <nav>
+    <div className="app-container">
+      <header className="app-header">
+        <h1>💲Budgeting App💲</h1>
+        <nav className="app-nav">
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -20,15 +22,15 @@ function App() {
               <Link to="/charts">Charts</Link>
             </li>
             <li>
-              <Link to="/Dashboard">Dashboard</Link>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
           </ul>
         </nav>
       </header>
       <main>
-        <Outlet /> 
+        <Outlet />
       </main>
-      <footer>
+      <footer className="app-footer">
         <p>© 2024 Budgeting App</p>
       </footer>
     </div>
