@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 
 
 /**
@@ -7,6 +8,10 @@ export const seed = async function (knex) {
   // Delete all existing entries in transactions and category tables
   await knex('transactions').del();
   await knex('category').del();
+
+  function datestamp(){
+    return format(new Date(), 'yyyy-MM-dd')
+  }
 
   // Insert categories
   await knex('category').insert([
@@ -21,31 +26,31 @@ export const seed = async function (knex) {
   await knex('transactions').insert([
     {
       name: 'Grocery Store',
-      created_at: knex.fn.now(),
+      created_at: datestamp(),
       amount: 45.99,
       category_id: 1, // Food
     },
     {
       name: 'Netflix Subscription',
-      created_at: knex.fn.now(),
+      created_at: datestamp(),
       amount: 12.99,
       category_id: 2, // Entertainment
     },
     {
       name: 'Electricity Bill',
-      created_at: knex.fn.now(),
+      created_at: datestamp(),
       amount: 89.50,
       category_id: 3, // Bills
     },
     {
       name: 'New Shoes',
-      created_at: knex.fn.now(),
+      created_at: datestamp(),
       amount: 75.00,
       category_id: 4, // Shopping
     },
     {
       name: 'Bus Ticket',
-      created_at: knex.fn.now(),
+      created_at: datestamp(),
       amount: 2.75,
       category_id: 5, // Transportation
     },
