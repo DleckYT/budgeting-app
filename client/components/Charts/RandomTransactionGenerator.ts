@@ -56,7 +56,7 @@ export const CategoriesData = [
 ]
 
 const startDate = new Date('2020-01-01')
-const endDate = new Date('2024-12-31')
+const endDate = new Date('2024-02-31')
 
 const randDate = () =>{
   const time = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime())
@@ -66,7 +66,7 @@ const randDate = () =>{
 export default function GenerateTransactions(){
   const transactions: Array<Transaction> = []
 
-  for (let i = 0; i < 100; i++){
+  for (let i = 0; i < 77; i++){
     const randIndex = Math.floor(Math.random() * ExpenseData.length)
     const data = ExpenseData[randIndex]
     transactions.push({

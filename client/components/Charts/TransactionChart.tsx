@@ -19,7 +19,9 @@ export default function TransactionChart(props: Props){
       shared: true
     },
     axisX:{
-      viewportMinimum: props.data[0] ? Math.max(0, props.data[0].dataPoints!.length - 23) : undefined
+      viewportMinimum: props.data[0] ? Math.max(0, props.data[0].dataPoints!.length - 240) : undefined,
+      labelAngle: -30,
+      valueFormatString: " ",
     },
     axisY:{
       minimum: 0,

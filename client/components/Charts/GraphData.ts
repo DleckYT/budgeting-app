@@ -1,4 +1,4 @@
-import { endOfMonth, format, formatISO, parseISO, startOfMonth } from "date-fns";
+import { format, formatISO, parseISO, startOfMonth } from "date-fns";
 import { Transaction } from "../../../models/transactions";
 import { Category } from "../../../models/categories";
 
@@ -16,7 +16,7 @@ export interface ChartData{
   yValueFormatString?: string
 }
 
-function BasicTransactionData(fullTransactionList: Array<Transaction>, transactions: Array<Transaction>, name?: string): Array<ChartData>{ // graph that shows total transaction expense per month across all categories
+function BasicTransactionData(fullTransactionList: Array<Transaction>, transactions: Array<Transaction>, name?: string, type = 'column'): Array<ChartData>{ // graph that shows total transaction expense per month across all categories
   if (transactions.length === 0) return [{}]
   //total expenses per month
   //month and year as string
@@ -55,19 +55,19 @@ function BasicTransactionData(fullTransactionList: Array<Transaction>, transacti
     dataMap.get(monthStartISO)!.y += tran.amount
   }
 
-  const dataPoints = Array.from(dataMap, ([key, value]) =>{
-    return value as DataPoint
+  const dataPoints = Array.from(dataMap, (kvp) =>{
+    return kvp[1] as DataPoint
   }).sort((a, b) => a.x - b.x)
 
   return [{
-    type: 'stackedColumn',
+    type,
     name,
     dataPoints,
     yValueFormatString: "$#,##0.#0"
   }]
 }
 
-function CategorizedTransactions(transactions: Array<Transaction>, categories: Array<Category>){
+function CategorizedTransactions(transactions: Array<Transaction>, categories: Array<Category>, type='column'){
   const categoryMap = new Map(categories.map(c => [c.id, c]))
   const chartData: Array<ChartData> = []//Array(categories.length).fill([])
 
@@ -80,7 +80,7 @@ function CategorizedTransactions(transactions: Array<Transaction>, categories: A
   }
 
   for (const [category_id, trans] of transactionMap){
-    const data = BasicTransactionData(transactions, trans, categoryMap.get(category_id)?.name)[0]
+    const data = BasicTransactionData(transactions, trans, categoryMap.get(category_id)?.name, type)[0]
     /*data.toolTipContent = 
     `<div class="tooltip">
       <div>{label}</div>
