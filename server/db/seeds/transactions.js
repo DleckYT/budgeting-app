@@ -128,13 +128,13 @@ export const seed = async function (knex) {
       {
         name: 'Flight Ticket',
         created_at: datestamp(year, month),
-        amount: parseFloat((Math.random() * (600 - 200) + 200).toFixed(2)),
+        amount: parseFloat((Math.random() * (20 - 10) + 10).toFixed(2)),
         category_id: 9, 
       },
       {
         name: 'Hotel Booking',
         created_at: datestamp(year, month),
-        amount: parseFloat((Math.random() * (300 - 100) + 100).toFixed(2)),
+        amount: parseFloat((Math.random() * (20 - 10) + 10).toFixed(2)),
         category_id: 9, 
       }
     );
