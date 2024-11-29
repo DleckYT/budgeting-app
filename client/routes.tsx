@@ -3,7 +3,7 @@ import { createRoutesFromElements, Route } from 'react-router-dom'
 import App from './components/App'
 import Transactions from './components/Transactions'
 import Categories from './components/Categories'
-import Charts from './components/Charts'
+import Charts from './components/Charts/Charts'
 import Dashboard from './components/Dashoboard'
 import EditTransaction from './components/EditTransaction'
 
