@@ -17,14 +17,12 @@ const routes = [
         element: <h2>Welcome to the Budgeting App</h2>, // Default page
       },
       {
-        path: "transactions", // Keep it relative to the parent
-        element: <Transactions />,
-        children: [
-          {
-            path: "edit/:id", // This path will be resolved as "/transactions/edit/:id"
-            element: <EditTransaction />,
-          },
-        ],
+        path: "transactions",
+        element: <Transactions />, // List transactions
+      },
+      {
+        path: "transactions/edit/:id", // Edit transaction path as a separate route
+        element: <EditTransaction />, // Render the EditTransaction component
       },
       {
         path: "categories", // Correct the path to be relative

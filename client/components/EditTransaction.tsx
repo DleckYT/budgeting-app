@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate, Navigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useTransaction, useUpdateTransaction } from '../hooks/useTransactions'
 import { useCategories } from '../hooks/useCategories'
-import { useAuth0 } from '@auth0/auth0-react';
 
 function EditTransaction() {
-
-  const { isAuthenticated } = useAuth0();
-  if (!isAuthenticated) {
-    return <Navigate to="/" />;
-  }
-
-
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
 
