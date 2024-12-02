@@ -163,7 +163,7 @@ function Transactions() {
           <h3 className="text-xl font-semibold mt-6 mb-2">{monthYear}</h3>
           <ul>
             {transactions.map((transaction) => {
-              if (!categorySelection.get(transaction.category_id).selected) return
+              if (categorySelection && !categorySelection.get(transaction.category_id).selected) return
               return <li key={transaction.id} className="bg-white p-4 shadow-md rounded-md flex justify-between items-center mb-2">
                 <div>
                   <p className="font-medium">{transaction.name}</p>
