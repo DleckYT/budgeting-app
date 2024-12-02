@@ -1,24 +1,45 @@
 // routes.tsx
-import { createRoutesFromElements, Route } from 'react-router-dom'
-import App from './components/App'
-import Transactions from './components/Transactions'
-import Categories from './components/Categories'
-import Charts from './components/Charts/Charts'
-import Dashboard from './components/Dashoboard'
-import EditTransaction from './components/EditTransaction'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { createBrowserRouter } from 'react-router-dom';
+import App from './components/App';
+import Transactions from './components/Transactions';
+import Categories from './components/Categories';
+import Charts from './components/Charts/Charts';
+import EditTransaction from './components/EditTransaction';
 
-const routes = createRoutesFromElements(
-  <Route element={<App />}>
-    <Route index element={<h2>Welcome to the Budgeting App</h2>} /> {/* Default page */}
-    <Route path='transactions'>
-      <Route index element={<Transactions/>}/>
-      <Route path="edit/:id" element={<EditTransaction />} />
-    </Route>
-    <Route path="/categories" element={<Categories />} />
-    <Route path="/charts" element={<Charts />} />
-    <Route path="/Dashboard" element={<Dashboard />} />
-    {/*<Route path="/transactions/edit/:id" element={<EditTransaction />} />*/}
-  </Route>
-)
+const routes = [
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <h2>Welcome to the Budgeting App</h2>, // Default page
+      },
+      {
+        path: "transactions", // Keep it relative to the parent
+        element: <Transactions />,
+        children: [
+          {
+            path: "edit/:id", // This path will be resolved as "/transactions/edit/:id"
+            element: <EditTransaction />,
+          },
+        ],
+      },
+      {
+        path: "categories", // Correct the path to be relative
+        element: <Categories />,
+      },
+      {
+        path: "charts", // Correct the path to be relative
+        element: <Charts />,
+      },
+      // {
+      //   path: "dashboard", // Correct the path to be relative
+      //   element: <Dashboard />,
+      // },
+    ],
+  },
+];
 
-export default routes
+export default routes;
