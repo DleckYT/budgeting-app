@@ -21,9 +21,9 @@ function App(): JSX.Element {
             <li>
               <Link to="/charts">Charts</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/dashboard">Dashboard</Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </header>
