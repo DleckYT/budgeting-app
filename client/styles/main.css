@@ -89,3 +89,28 @@ main {
   padding: 0.5rem;
   font-size: 0.9rem;
 }
+
+.category-picker{
+  min-height: 100px;
+  width: 400px;
+  background-color: white;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.cat-item{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.cat-check{
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
