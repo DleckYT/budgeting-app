@@ -19,7 +19,7 @@ export default function TransactionChart(props: Props){
       shared: true
     },
     axisX:{
-      viewportMinimum: props.data[0] ? Math.max(0, props.data[0].dataPoints!.length - 240) : undefined,
+      viewportMinimum: props.data[0] ? Math.max(0, props.data[0].dataPoints!.length - 23) : undefined,
       labelAngle: -30,
       valueFormatString: " ",
     },
@@ -30,7 +30,7 @@ export default function TransactionChart(props: Props){
     zoomEnabled: true,
     data: props.data
   }
-  return <div style={{width: '1200px'}}>
+  return <div>
     <CanvasJSChart options={options}/>
   </div> 
 }
