@@ -1,5 +1,5 @@
-// routes.tsx
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+
 import { createBrowserRouter } from 'react-router-dom';
 import App from './components/App';
 import Transactions from './components/Transactions';
@@ -14,28 +14,28 @@ const routes = [
     children: [
       {
         index: true,
-        element: <h2>Welcome to the Budgeting App</h2>, // Default page
+        element: <h2>Welcome to the Budgeting App</h2>, 
       },
       {
         path: "transactions",
-        element: <Transactions />, // List transactions
+        element: <Transactions />, 
       },
       {
-        path: "transactions/edit/:id", // Edit transaction path as a separate route
-        element: <EditTransaction />, // Render the EditTransaction component
+        path: "transactions/edit/:id", 
+        element: <EditTransaction />, 
       },
       {
-        path: "categories", // Correct the path to be relative
+        path: "categories", 
         element: <Categories />,
       },
       {
-        path: "charts", // Correct the path to be relative
+        path: "charts", 
         element: <Charts />,
       },
-      // {
-      //   path: "dashboard", // Correct the path to be relative
-      //   element: <Dashboard />,
-      // },
+      
+      
+      
+      
     ],
   },
 ];

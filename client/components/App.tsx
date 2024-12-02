@@ -11,7 +11,7 @@ function App(): JSX.Element {
     <div className="app-container">
       <header className="app-header">
         <h1>💲Budgeting App💲</h1>
-        {isAuthenticated && ( // Render the navigation links only if authenticated
+        {isAuthenticated && ( 
           <nav className="app-nav">
             <ul>
               <li>
