@@ -12,6 +12,19 @@ export type CategorySelection = {
   selected: boolean
 }
 
+const groupByMonthYear = (transactions) => {
+  return transactions.reduce((acc, transaction) => {
+    const date = new Date(transaction.created_at)
+    const monthYear = format(date, 'MMMM yyyy')
+
+    if (!acc[monthYear]) {
+      acc[monthYear] = []
+    }
+    acc[monthYear].push(transaction)
+    return acc
+  }, {})
+}
+
 function Transactions() {
   const { data: categories } = useCategories()
   const { data: transactions } = useTransactions()
@@ -46,11 +59,11 @@ function Transactions() {
     })
   }
 
-  const handleDeleteTransaction = (id: number) => {
+  const handleDeleteTransaction = (id) => {
     deleteTransaction.mutate(id)
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target
     setTransactionData((prevData) => ({
       ...prevData,
@@ -58,12 +71,17 @@ function Transactions() {
     }))
   }
 
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDateChange = (e) => {
     setTransactionData((prevData) => ({
       ...prevData,
       created_at: e.target.value,
     }))
   }
+
+  const sortedTransactions = transactions?.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+
+
+  const groupedTransactions = groupByMonthYear(sortedTransactions || [])
 
   return (
     <div className="container mx-auto p-4">
@@ -132,34 +150,39 @@ function Transactions() {
       </form>
 
       <h2 className="text-2xl font-semibold mt-8 mb-4">Transactions</h2>
-      <CategoryPicker categories={categorySelection} setCategorySelection={setCategorySelection}/>
-      <ul>
-  {transactions?.map((transaction) => (
-    <li key={transaction.id} className="bg-white p-4 shadow-md rounded-md flex justify-between items-center">
-      <div>
-        <p className="font-medium">{transaction.name}</p>
-        <p className="text-sm text-gray-500">
-          ${transaction.amount.toFixed(2)} -{' '}
-          {format(new Date(transaction.created_at), 'dd/MM/yy HH:mm')}
-        </p>
-      </div>
-      <div>
-        <Link
-          to={`/transactions/edit/${transaction.id}`}
-          className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 mr-2"
-        >
-          Edit
-        </Link>
-        <button
-          onClick={() => handleDeleteTransaction(transaction.id)}
-          className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
-        >
-          Delete
-        </button>
-      </div>
-    </li>
-  ))}
-</ul>
+
+      {Object.entries(groupedTransactions).map(([monthYear, transactions]) => (
+        <div key={monthYear}>
+          <h3 className="text-xl font-semibold mt-6 mb-2">{monthYear}</h3>
+          <ul>
+            {transactions.map((transaction) => (
+              <li key={transaction.id} className="bg-white p-4 shadow-md rounded-md flex justify-between items-center mb-2">
+                <div>
+                  <p className="font-medium">{transaction.name}</p>
+                  <p className="text-sm text-gray-500">
+                    ${transaction.amount.toFixed(2)} -{' '}
+                    {format(new Date(transaction.created_at), 'dd/MM/yy HH:mm')}
+                  </p>
+                </div>
+                <div>
+                  <Link
+                    to={`/transactions/edit/${transaction.id}`}
+                    className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 mr-2"
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={() => handleDeleteTransaction(transaction.id)}
+                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   )
 }
