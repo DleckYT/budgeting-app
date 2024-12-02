@@ -31,15 +31,22 @@ function Transactions() {
   const addTransaction = useAddTransaction()
   const deleteTransaction = useDeleteTransaction()
   
-  const [categorySelection, setCategorySelection] = useState<null | Array<CategorySelection>>(null)
+  const [categorySelection, setCategorySelection] = useState<null | Map<number, CategorySelection>>(null)
   
   if (categories && !categorySelection){
-    setCategorySelection(categories.map(c =>{
-      return {
-        name: c.name,
-        selected: false
-      }
-    }))
+    setCategorySelection(
+      new Map(
+        categories.map(c =>{
+          return [
+            c.id, 
+            {
+              name: c.name,
+              selected: true
+            }
+          ]
+        })
+      )
+    )
   }
 
   const [transactionData, setTransactionData] = useState({
@@ -150,13 +157,14 @@ function Transactions() {
       </form>
 
       <h2 className="text-2xl font-semibold mt-8 mb-4">Transactions</h2>
-
+      <CategoryPicker categories={categorySelection} setCategorySelection={setCategorySelection}/>
       {Object.entries(groupedTransactions).map(([monthYear, transactions]) => (
         <div key={monthYear}>
           <h3 className="text-xl font-semibold mt-6 mb-2">{monthYear}</h3>
           <ul>
-            {transactions.map((transaction) => (
-              <li key={transaction.id} className="bg-white p-4 shadow-md rounded-md flex justify-between items-center mb-2">
+            {transactions.map((transaction) => {
+              if (!categorySelection.get(transaction.category_id).selected) return
+              return <li key={transaction.id} className="bg-white p-4 shadow-md rounded-md flex justify-between items-center mb-2">
                 <div>
                   <p className="font-medium">{transaction.name}</p>
                   <p className="text-sm text-gray-500">
@@ -179,7 +187,7 @@ function Transactions() {
                   </button>
                 </div>
               </li>
-            ))}
+            })}
           </ul>
         </div>
       ))}
