@@ -1,7 +1,14 @@
 import React, { useState } from 'react'
 import { useCategories, useAddCategory, useDeleteCategory } from '../hooks/useCategories'
+import { useAuth0 } from '@auth0/auth0-react';
+import { Navigate } from 'react-router-dom';
 
 function Categories() {
+
+  const { isAuthenticated } = useAuth0();
+  if (!isAuthenticated) {
+    return <Navigate to="/" />;
+  }
   const { data: categories } = useCategories()
   const addCategory = useAddCategory()
   const deleteCategory = useDeleteCategory()

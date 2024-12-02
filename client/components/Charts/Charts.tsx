@@ -4,8 +4,16 @@ import TransactionChart from './TransactionChart'
 import './charts.css'
 import { getTransactions } from '../../apis/transactions'
 import { getCategories } from '../../apis/categories'
+import { useAuth0 } from '@auth0/auth0-react'
+import { Navigate } from 'react-router-dom'
 
 function Charts() {
+
+  const { isAuthenticated } = useAuth0();
+  if (!isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
   const [transactionsQuery, categoriesQuery] = useQueries({
     queries: [
       { queryKey: ['transactions'], queryFn: getTransactions },

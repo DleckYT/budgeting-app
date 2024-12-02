@@ -4,8 +4,9 @@ import { useTransactions } from '../hooks/useTransactions'
 import { useAddTransaction } from '../hooks/useTransactions'
 import { useDeleteTransaction } from '../hooks/useTransactions'
 import { format } from 'date-fns'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import CategoryPicker from './CategoryPicker'
+import { useAuth0 } from '@auth0/auth0-react';
 
 export type CategorySelection = {
   name: string,
@@ -26,6 +27,14 @@ const groupByMonthYear = (transactions) => {
 }
 
 function Transactions() {
+
+  const { isAuthenticated } = useAuth0();
+  if (!isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
+
+
   const { data: categories } = useCategories()
   const { data: transactions } = useTransactions()
   const addTransaction = useAddTransaction()
