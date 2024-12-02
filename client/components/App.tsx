@@ -3,6 +3,7 @@ import { Outlet, Link } from 'react-router-dom'
 import '../styles/main.css'
 
 function App(): JSX.Element {
+  console.log("App")
   return (
     <div className="app-container">
       <header className="app-header">

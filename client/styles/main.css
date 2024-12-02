@@ -89,3 +89,9 @@ main {
   padding: 0.5rem;
   font-size: 0.9rem;
 }
+
+.category-picker{
+  min-height: 100px;
+  width: 400px;
+  background-color: white;
+}

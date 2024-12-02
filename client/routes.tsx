@@ -10,11 +10,14 @@ import EditTransaction from './components/EditTransaction'
 const routes = createRoutesFromElements(
   <Route element={<App />}>
     <Route index element={<h2>Welcome to the Budgeting App</h2>} /> {/* Default page */}
-    <Route path="/transactions" element={<Transactions />} />
+    <Route path='transactions'>
+      <Route index element={<Transactions/>}/>
+      <Route path="edit/:id" element={<EditTransaction />} />
+    </Route>
     <Route path="/categories" element={<Categories />} />
     <Route path="/charts" element={<Charts />} />
     <Route path="/Dashboard" element={<Dashboard />} />
-    <Route path="/transactions/edit/:id" element={<EditTransaction />} />
+    {/*<Route path="/transactions/edit/:id" element={<EditTransaction />} />*/}
   </Route>
 )
 

@@ -5,12 +5,29 @@ import { useAddTransaction } from '../hooks/useTransactions'
 import { useDeleteTransaction } from '../hooks/useTransactions'
 import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
+import CategoryPicker from './CategoryPicker'
+
+export type CategorySelection = {
+  name: string,
+  selected: boolean
+}
 
 function Transactions() {
   const { data: categories } = useCategories()
   const { data: transactions } = useTransactions()
   const addTransaction = useAddTransaction()
   const deleteTransaction = useDeleteTransaction()
+  
+  const [categorySelection, setCategorySelection] = useState<null | Array<CategorySelection>>(null)
+  
+  if (categories && !categorySelection){
+    setCategorySelection(categories.map(c =>{
+      return {
+        name: c.name,
+        selected: false
+      }
+    }))
+  }
 
   const [transactionData, setTransactionData] = useState({
     name: '',
@@ -115,6 +132,7 @@ function Transactions() {
       </form>
 
       <h2 className="text-2xl font-semibold mt-8 mb-4">Transactions</h2>
+      <CategoryPicker categories={categorySelection} setCategorySelection={setCategorySelection}/>
       <ul>
   {transactions?.map((transaction) => (
     <li key={transaction.id} className="bg-white p-4 shadow-md rounded-md flex justify-between items-center">
