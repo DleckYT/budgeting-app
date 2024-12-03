@@ -10,9 +10,12 @@ import './styles/main.css';
 
 const queryClient = new QueryClient();
 
-const domain = import.meta.env.VITE_AUTH0_DOMAIN as string;
-const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID as string;
-const audience = import.meta.env.VITE_AUTH0_AUDIENCE as string;
+const domain = "troll-app.au.auth0.com"
+const clientId = "AjE4EaIhYNmzwWLSomMDOwIrIYVjGJgu"
+const audience = 'https://troll-app.au.auth0.com/api/v2/'
+
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
   createRoot(document.getElementById('app') as HTMLElement).render(
