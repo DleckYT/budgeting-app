@@ -1,13 +1,20 @@
-import React from 'react'
-import { Outlet, Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 
 import '../styles/main.css'
 import Home from './Home'
 
 function App(): JSX.Element {
-  const { logout, user, isAuthenticated } = useAuth0()
+  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0()
+  const navigate = useNavigate()
 
+  // Redirect to /transactions after login
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/transactions')
+    }
+  }, [isAuthenticated, navigate])
   return (
     <div className="app-container">
       <header className="app-header">
