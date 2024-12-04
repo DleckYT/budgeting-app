@@ -39,7 +39,7 @@ body {
 
 /* Header */
 .app-header {
-  background-color: #0078d7;
+  background-color: #0871c7;
   color: white;
   padding: 1rem;
   text-align: center;
@@ -114,3 +114,4 @@ main {
   height: 20px;
   pointer-events: none;
 }
+
