@@ -14,7 +14,7 @@ const routes = [
     children: [
       {
         index: true,
-        element: <h2>Welcome to the Budgeting App</h2>, 
+        // element: <h2>Welcome to the Budgeting App</h2>, 
       },
       {
         path: "transactions",
